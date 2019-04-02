@@ -116,3 +116,18 @@ js
         }
 
 
+**小程序取值**
+    _首先在wxml里面取得循环出来的每个item的id，如下_
+
+     <view class="select-small" wx:for="{{goodsList}}" wx:key bindtap='goodsNext' data-goodsid='{{item.id}}'>
+
+然后在js面取值
+
+      //商品跳转
+      goodsNext: function(e) {
+        let goods_id = e.currentTarget.dataset.goodsid;
+        wx.navigateTo({
+          url: '/pages/goods/goods?goods_id=' + goods_id,
+        })
+      },
+这样就取到商品的id，就可以带着id跳转了。
