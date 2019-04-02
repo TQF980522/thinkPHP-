@@ -1,5 +1,7 @@
 ﻿# 学习小程序和php的杂项
+
 ---
+
 **上拉加载**
 wxml：
 
@@ -35,7 +37,7 @@ js
               })
             });
           },
-          
+    
           searchInput: function(e) {
             let _this = this;
             let sinput = e.detail.value;
@@ -52,13 +54,13 @@ js
             _this.setData({
               page: 0,
             })
-
+    
             _this.queryDemand(sinput).then((data) => {
               _this.setData({
                 isHideLoadMore: true,
                 goodsList: data,
               })
-        
+    
             });
           },
           /**
@@ -69,7 +71,7 @@ js
             // wx.showLoading({
             //   title: '玩命加载中',
             // })
-        
+    
             // 经过onload 状态改变为了true
             let sinput = _this.data.sinput;
             _this.setData({
@@ -100,7 +102,7 @@ js
               })
             })
           },
-          
+
 后端PHP：
 
         function goods_serach(){
@@ -114,7 +116,6 @@ js
             // Config::get('paging') 获取公共配置设置的分页数  $page 是取得前端传过来的当前页数 
             return json_encode($goods);
         }
-
 
 **小程序取值**
     _首先在wxml里面取得循环出来的每个item的id，如下_
@@ -130,4 +131,5 @@ js
           url: '/pages/goods/goods?goods_id=' + goods_id,
         })
       },
+
 这样就取到商品的id，就可以带着id跳转了。
