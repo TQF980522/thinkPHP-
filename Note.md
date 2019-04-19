@@ -48,7 +48,7 @@ foreach($list as $user){
 GoodsList模型下关联GoodsCategory模型 方法onlinetype 代码
 
 ```
-class GoodsList extends Model
+****class GoodsList extends Model
 {
     protected $autoWriteTimestamp = 'timestamp';
 
@@ -111,4 +111,4 @@ Bracket Pair Colorizer: 不同的颜色括号提示
 
 ![5cb947bd822c5](https://i.loli.net/2019/04/19/5cb947bd822c5.png)
 
-可能有重复的，但是都装上了哈哈哈
+**可能有重复的，但是都装上了哈哈哈**  
