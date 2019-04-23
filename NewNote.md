@@ -32,8 +32,6 @@
 
 - git push [[remoteName]] [[localBranchName]] 拉取远程仓库
 
-  
-
 ##### 本地仓库基本命令
 
 1. git  init 初始化仓库 把本地的一个文件夹设置成git可以管理的仓库，会在文件夹内生成一个隐藏的git文件
@@ -45,8 +43,6 @@
 4. git add  [[fileName]]  或 全部添加 git add [.]
 
 5. git  commit -m   '备注  一般 modify  --by  谁'  提交到本地仓库 -m 备注
-
-
 
 #### 分支的话现在没用到 用到再写
 
@@ -62,10 +58,61 @@
 
 再  git push  -u origin master
 
-
-
-> #### 注意！！  每次操作文件时，最好先 git pull 把远程仓库的文件先拉下来 在修改。避免冲突
-
+> #### 注意！！  每次操作文件时，最好先 git pull 把远程仓库的文件先拉下来 在修改。避免冲突
 
 
 
+
+
+# [js中forEach，for in，for of循环的用法]
+
+
+
+1. **一般的遍历数组的方法**
+
+       var array = [1,2,3,4,5,6,7]; 
+       for (var i = 0; i < array.length; i) {  
+           console.log(i,array[i]);  
+       }
+
+2. **用for in的方遍历数组**
+
+   **tips: for in总是得到对象的key或数组,字符串的下标**
+
+       for(let index in array) {  
+           console.log(index,array[index]);  
+       };
+
+3. **用for of的方遍历数组**
+
+   **tips: for of总是得到数组,字符串的value值，但是不能遍历对象**
+
+       for(let v of array) {  
+           console.log(v);  
+       }; 
+       
+         let s = "helloabc"; 
+       
+         for(let c of s) {  
+       
+         console.log(c); 
+       
+        }
+
+4. **forEach**
+
+   **tips: foreach能得到数组，字符串的值。优点是能对对象使用**
+
+   ```
+   array.forEach(v=>{  
+       console.log(v);  
+   });
+   array.forEach（function(v){  
+       console.log(v);  
+   });
+    
+   ```
+
+   
+
+   
