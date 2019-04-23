@@ -60,13 +60,7 @@
 
 > #### 注意！！  每次操作文件时，最好先 git pull 把远程仓库的文件先拉下来 在修改。避免冲突
 
-
-
-
-
-# [js中forEach，for in，for of循环的用法]
-
-
+## js中forEach，for in，for of循环的用法
 
 1. **一般的遍历数组的方法**
 
@@ -110,9 +104,61 @@
    array.forEach（function(v){  
        console.log(v);  
    });
-    
    ```
 
-   
+5. **Set**
 
+   ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+
+   `Set`本身是一个构造函数，用来生成 Set 数据结构。
+
+   ```javascript
+   const s = new Set();
    
+   [2, 3, 5, 4, 5, 2, 2].forEach(x => s.add(x));
+   
+   for (let i of s) {
+     console.log(i);
+   }
+   // 2 3 5 4
+   ```
+
+   上面代码通过`add()`方法向 Set 结构加入成员，结果表明 Set 结构不会添加重复的值。
+
+6. **JavaScript 提供了 foreach()  map() 两个可遍历 Array对象 的方法**　　　
+
+       forEach和map用法类似，都可以**遍历到数组的每个元素**，而且参数一致；
+
+   ```
+   Array.forEach(function(value , index , array){ //value为遍历的当前元素，index为当前索引，array为正在操作的数组
+     //do something
+   },thisArg)      //thisArg为执行回调时的this值
+   ```
+
+   **不同点：**
+
+     forEach() 方法对数组的每个元素执行一次提供的函数。总是返回undefined；
+
+     map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。返回值是一个新的数组；
+
+     例子如下：
+
+   ```
+   var array1 = [1,2,3,4,5];
+    
+   var x = array1.forEach(function(value,index){
+    
+       console.log(value);   //可遍历到所有数组元素
+    
+       return value + 10
+   });
+   console.log(x);   //undefined    无论怎样，总返回undefined
+    
+   var y = array1.map(function(value,index){
+    
+       console.log(value);   //可遍历到所有数组元素
+    
+       return value + 10
+   });
+   console.log(y);   //[11, 12, 13, 14, 15]   返回一个新的数组
+   ```
