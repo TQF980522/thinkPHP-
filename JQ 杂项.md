@@ -252,7 +252,7 @@ on(type,[[selecetor] ] ,fn )
 
 - off 清除绑定事件 
 
-1.  off('click'); 清除当前元素的点击事件
+1. off('click'); 清除当前元素的点击事件
 
 2. off(); 清除当前元素的所有事件
 
@@ -260,28 +260,128 @@ on(type,[[selecetor] ] ,fn )
 
 4. off ('click.xxxx'); 清除命名空间事件
 
-   
+### 其他事件方法
 
-   ### 其他事件方法
+- hover(enter[,leave])
 
-   - hover(enter[,leave])
-     - enter:鼠标移入时执行
-     - leave:鼠标移出时执行
+  - enter:鼠标移入时执行
+  - leave:鼠标移出时执行
 
-   > hover方法内部使用mouseenter + mouseleave来实现效果
+  > hover方法内部使用mouseenter + mouseleave来实现效果
 
-   - trigger(type): 手动触发事件（即使事件没有发生，也能执行事件处理函数）
+- trigger(type): 手动触发事件（即使事件没有发生，也能执行事件处理函数）
 
-   - triggerHandler(type): 这个方法会触发指定的事件类型上所有绑定的处理函数。但不会执行浏览器默认行为，也不会产生事件冒泡
+- triggerHandler(type): 这个方法会触发指定的事件类型上所有绑定的处理函数。但不会执行浏览器默认行为，也不会产生事件冒泡
 
-   - 阻止浏览器默认行为  
+- 阻止浏览器默认行为  
 
-     event.preventDefault();
+  event.preventDefault();
 
-   - 阻止事件传播  
+- 阻止事件传播  
 
-     event.stopPropagation();
+  event.stopPropagation();
 
-   - 两者一起阻止：  
+- 两者一起阻止：  
 
-     return false;
+  return false;
+
+
+
+## jQuery动画
+
+### 基本动画效果
+
+- 显示隐藏：show()/hide()
+
+  - hide(duration)通过改变元素的高度、宽度、和不透明度，直到这三个属性值到0
+  - show(duration)通过改变元素的高度、宽度、和不透明度，直至内容完全可见
+
+- 滑动（通过改变高度）
+
+  - slideDown([speed,callback])：
+    1. 显示元素
+    2. 不断改变高度，直到样式内设定的值
+  - slideUp([speed,callback])：
+    1. 不断改变高度，直到0
+    2. 隐藏元素
+  - slideToggle([speed,callback])  
+
+    当元素隐藏时调用slideDown()，当元素显示时调用slideUp()
+
+- 淡入淡出（通过改变不透明度）
+
+  - fadeIn:  
+
+    1)显示元素  
+
+    2)不断改变透明度直到1
+
+  - fadeOut:  
+
+    1)不断改变透明度直到0  
+
+    2)隐藏元素
+
+  - fadeToggle([speed,callback])
+
+  - fadeTo([[speed],opacity,[fn]]) 不断改变透明度opacity，直到设定的值，并在动画完成后可选地触发一个回调函数。
+
+> PS：jQuery动画由三种预设速度slow,normal,fast（600，400，200）
+
+### 自定义动画
+
+- animate (params,[speed],[fn])
+
+- :animated  
+
+  获取正在执行动画的元素，一般与is()方法配合使用，用于判断元素是否处于动画状态
+
+### 动画队列
+
+- 一个元素上的动画：
+
+  - 当animate中存在多个属性时，动画同时发生
+  - 当同一个元素链式调用animate时，动画是按顺序发生(队列)
+
+- 不同元素上的动画：
+
+  - 默认情况下，动画同时发生
+  - 回调函数内的动画等到当前动画执行完后才接着执行
+
+- stop([clearQueue],[jumpToEnd])  
+
+  不加参数：停止当前元素所有《正在运行》的动画。
+
+  - clearQueue:值为true时，清除队列
+  - jumpToEnd:值为true时，跳到当前动画的最后一帧
+
+- delay(duration)  
+
+  设置一个延时来推迟执行队列中之后的动画。
+
+  - duration:延迟的时间
+
+
+
+## ajax
+
+### jQuery的ajax方法
+
+- $.ajax(settings)
+
+  - type:请求类型，默认GET
+  - url:数据请求地址（API地址）
+  - data:发送到服务器的数据对象，格式：{Key:value}。
+  - success:请求成功时回调函数。
+  - dataType:设定返回数据的格式，json, jsonp, text(默认), html, xml, script
+  - async：是否为异步请求，默认true
+
+- $.get(url,[data],[fn],[dataType]) // type:’get’
+
+- $.post(url,[data],[fn],[dataType]) // type:’post’
+
+- $.getJSON(url,[data],[fn]) // type:’get’, dataType:’json’
+
+- $.getScript(url,[callback]) // type:’get’, dataType:’script’
+
+- load(url,[data],[callback]) 载入远程 HTML 文件代码并插入页面中。
