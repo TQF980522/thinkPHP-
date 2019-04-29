@@ -74,27 +74,15 @@
 
 - 然后修改了的话 同步到远程仓库上面的分支 使用 git push origin xxxx（分支名字）
 
-
-
-
-
 分支的进一步理解：比如C负责开发login-register，在本地建立login-register分支，git pull  origin 拉下远端的分支，编写后通过 push 到远程仓库的login-register分支上去 这样子的话远程仓库login-register分支上也有项目了
 
 `push之前还是老三步  git add .  git commit  git push origin xxxx`
 
-
-
 github 上 可以点击compare 来比较代码
-
-
 
 完善一点的话：C在自己本地的login-register 上进行开发，开发完成后合并到自己本地的master中 再从本地的master中提交到远端的login-register，组长去github上 compare对比代码 然后审核代码 有必要的话建立pull&request
 
-
-
 `还是注意！ 在要提交之前，先把分支拉下来 git pull origin xxxx 在提交 git push origin xxxx`
-
-
 
 git  checkout xxxx  切换到分支  
 
@@ -104,8 +92,6 @@ git  checkout xxxx  切换到分支
 
 **执行命令 git merge xxxx（分支名字）**
 
-
-
 `合并好后 执行老三步 `
 
 `git add . `
@@ -114,11 +100,7 @@ git  checkout xxxx  切换到分支
 
 `git push origin master  提交到远程仓库的master`
 
-
-
 在经历过一段时间开发后 login-register已经开发完成了，组长在本地login-register中拉下远程仓库的login-register，切换到本地的master中 与本地的login-register进行合并 merge， 在从本地的master提交到远端的master 建立pull&request
-
-
 
 主分支master 组员不能动 只能组长自己从自己本地仓库的master 提交到远程仓库时使用
 
@@ -126,11 +108,7 @@ git  checkout xxxx  切换到分支
 
 ![5cc5cfc110dbe](https://i.loli.net/2019/04/29/5cc5cfc110dbe.png)
 
-
-
 然后就这样了。。。。
-
-
 
 ## js中forEach，for in，for of循环的用法
 
