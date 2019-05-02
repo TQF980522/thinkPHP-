@@ -167,20 +167,15 @@ requier表示要引入的插件，如果项目开始没有的话，cmd执行comp
 
 end.... ps：请求到这个方法 传递参数不能用ajax，只能用url带参数的方式，不然导不出表格，至于为什么，不懂解释。。只知道ajax只支持string json类型数据
 
-
-
 ### TP5 使用TCPDF 生成pdf文件打印预览
 
-1.  composer安装我们要使用的插件 tcpdf
+1. composer安装我们要使用的插件 tcpdf
 
    `composer require tecnickcom/tcpdf`
 
 2. 在common文件夹下新建控制器如：
-   
 
    ![5cc64c426173e](https://i.loli.net/2019/04/29/5cc64c426173e.png)
-
-
 
 注意命名空间
 
@@ -259,6 +254,17 @@ class  CreatPdf
 }
 ```
 
+首先：在页面添加一个按钮
+
+```
+ <button type="button" onclick="x_admin_show('打印预览','create_pdf.html?id={$vo.order_id}',800,700)" class="layui-btn layui-btn-xs"><iclass="layui-icon layui-icon-print"></i>打印
+ </button>
+```
+
+这里用了x_admin_show 在页面直接弹出窗口  然后带参数传到order的方法就是下面的create_pdf里 
+
+
+
 然后在要使用该控制器的方法的控制器里 如admin/order里要使用
 
 `//调用common里面控制器的Tcpdf类`
@@ -267,77 +273,25 @@ class  CreatPdf
 
 然后 在方法里
 
-
-
 ```
 //生成pdf
     public function create_pdf()
     {
         $id = input('param.id');
+
         $model = new OrderGoodsModel();
         $data = $model->where('order_id',  $id)->find();
-        $data['sales_time'] = date('Y-m-s h:i:s', $data['sales_time']);
-        switch ($data['order_type']) {
-            case 1:
-                $data['order_type'] = '商家配送';
-                break;
-            case 2:
-                $data['order_type'] = '自提';
-                break;
-        }
-        switch ($data['status']) {
-            case -1:
-                $data['status'] = '已取消';
-                break;
-            case 0:
-                $data['status'] = '待付款';
-                break;
-            case 1:
-                $data['status'] = '已付款';
-                break;
-            case 2:
-                $data['status'] = '待发货';
-                break;
-            case 3:
-                $data['status'] = '发货中';
-                break;
-            case 4:
-                $data['status'] = '已收货';
-                break;
-        }
-        $html = "<table  border=1>
-        <tr>
-            <td>订单号:$data[order_number]</td>
-            <td>价格:￥$data[price]</td>
-            <td>物流服务费:￥$data[service]</td>
-        </tr>
-          <tr>
-            <td>收件人：$data[realname]</td>
-            <td>联系方式：$data[phone]</td>
-            <td>收货地址：$data[address]</td>
-        </tr>
-          <tr>
-            <td>配送方式： $data[order_type]</td>
-            <td>状态： $data[status]</td>
-            <td>备注： $data[remark]</td>
-        </tr>
-           <tr>
-            <td>快递名称： $data[express_name]</td>
-            <td>快递单号： $data[express_number]</td>
-            <td></td>
-        </tr>
-           <tr>
-            <td>网点名字：$data[mention_name]</td>
-            <td>网点地址：$data[mention_address]</td>
-            <td>购买时间：$data[sales_time]</td>
-        </tr>
-        </tbody>
-    </table>";
+        // 把数据渲染到页面
+        $data['sales_time'] = date("Y-m-d H:i:s",$data['sales_time']);
+        //print_preview就是一个html页面 就一个表格
+
+        $tbl = $this->fetch('print_preview',  ['data' => $data]);
 
         $creat_pdf = new CreatPdf();
         //如果是把HTML页面转PDF格式执行以下代码
-        // $data = file_get_contents($html); //获取html页面的url
-        $creat_pdf->export_pdf($html);
+        // $html = file_get_contents($tbl); //获取html页面的url 没什么用 打印出来的是没有样式的文字 
+
+        $creat_pdf->export_pdf($tbl);
         die;
     }
 ```
@@ -347,11 +301,7 @@ class  CreatPdf
 因为是根据传过来的id去查找数据库然后把数据生成pdf 
 
 `$creat_pdf = new CreatPdf();`
-` //如果是把HTML页面转PDF格式执行以下代码`
-` // $data = file_get_contents($html); //获取html页面的url`
-` $creat_pdf->export_pdf($html);`
+` $creat_pdf->export_pdf($tbl);`
 ` die;`
 
-执行CreatPdf 的export_pdf方法 把$html传过去生成
-
-
+执行CreatPdf 的export_pdf方法 把数据$tbl传过去生成
