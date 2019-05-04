@@ -1,6 +1,6 @@
 ### PHP foreach用法及解释
 
-1. **foreach是PHP的一种语法结构，其实就是一个工具，(工具：就是工作的时候用到的器具)，那么在程序开发过程中，为了达到程序效果，就用到了foreach。**
+1. foreach是PHP的一种语法结构，其实就是一个工具，(工具：就是工作的时候用到的器具)，那么在程序开发过程中，为了达到程序效果，就用到了foreach。
 
 2. **怎么用**
 
@@ -75,13 +75,9 @@
 
    解说：k其实指的就是key,v其实指的就是value
 
-
-
 ## TP5 跨控制器调用方法。
 
 `其实文档有很详细的介绍，但是我就是想写`
-
-
 
 **1.在application\index\controller\文件夹里新建User.php**
 
@@ -106,25 +102,25 @@ use app\index\controller\User;
 
 class Index extends Controller
 {
-    
+
     public function diaoyong(){
         //方法一
         $model=new \app\index\controller\User;
         echo $model->index();
         echo "______________________<br>";
-        
+
         //方法二
         $model2=new User;
         echo $model2->index();
         echo "______________________<br>";
-        
+
         //方法三
         $model3=controller('User');
         echo $model3->index();
-        
-        
+
+
     }
-    
+
 }
 ```
 
@@ -135,3 +131,59 @@ class Index extends Controller
 `注：如果发现网上有雷同，全是我抄的，毕竟懒，不负责任哈哈`
 
 
+
+# PHP 构造方法 __construct()
+
+___
+
+`PHP 构造方法 __construct() 允许在实例化一个类之前先执行构造方法`
+
+
+
+##### 构造方法:
+
+**构造方法是类中的一个特殊方法。当使用 new 操作符创建一个类的实例时，构造方法将会自动调用，其名称必须是 __construct()**
+
+注意：在一个类中只能声明一个构造方法，而是只有在每次创建对象的时候都会去调用一次构造方法，不能主动的调用这个方法，所以通常用它执行一些有用的初始化任务。该方法无返回值。
+
+语法：
+
+function __construct(arg1,arg2,...)
+{
+    ......
+}
+
+例子：
+
+<?php
+class Person {
+    var $name;
+    var $age;
+
+    //定义一个构造方法初始化赋值
+    function __construct($name,  $age) {
+        $this->name=$name;
+        $this->age=$age;
+    }
+    
+    function say() {
+        echo "我的名字叫：".$this->name."<br />";
+    echo "我的年龄是：".$this->age;
+    }
+
+}
+
+$p1=new Person("张三", 20);
+$p1->say();
+?>
+
+运行该例子，输出：
+
+我的名字叫：张三
+的年龄是：20
+
+在该例子中，通过构造方法对对象属性进行初始化赋值。
+
+### 提示
+
+PHP 不会在本类的构造方法中再自动的调用父类的构造方法。要执行父类的构造方法，需要在子类的构造方法中调用 parent::__construct() 。
