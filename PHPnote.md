@@ -149,12 +149,9 @@ function __construct(arg1,arg2,...)
 {
     ......
 }
-
 ```
 
 例子：
-
-
 
     <?php
     class Person {
@@ -176,8 +173,6 @@ function __construct(arg1,arg2,...)
     $p1->say();
     ?>
 
-
-
 运行该例子，输出：
 
 我的名字叫：张三
@@ -189,13 +184,7 @@ function __construct(arg1,arg2,...)
 
 PHP 不会在本类的构造方法中再自动的调用父类的构造方法。要执行父类的构造方法，需要在子类的构造方法中调用 parent::__construct() 。
 
-
-
-
-
 # PHP 析构方法 __destruct()
-
-
 
 `PHP 析构方法 __destruct() 允许在销毁一个类之前执行执行析构方法。`
 
@@ -210,10 +199,7 @@ function __destruct()
 {
     ......
 }
-
 ```
-
-
 
 我们在上面的例子中加入下面的析构方法：
 
@@ -236,3 +222,50 @@ function __destruct()
 3. 在 PHP4 版本中，构造方法的名称必须与类名相同，且没有析构方法。
 
 
+
+# parent::_initialize()作用
+
+`父类初始化的时候有内容,子类是会继承的,但是子类如果也有初始化的时候,父类是会被覆盖掉的,为了保留父类的初始化内容就会使用parent::_initialize();`
+
+
+
+例如：子类需要继承父类内容
+
+```
+
+class Base extends Common 
+{
+	public function _initialize()
+	{
+        parent::_initialize();
+ 		if(!$this->check_admin_login()) $this->redirect('admin/Login/login');//未登录
+ 		$auth=new AuthRule;
+		$id_curr=$auth->get_url_id();
+        if(!$auth->check_auth($id_curr)) $this->error('没有权限',url('admin/Index/index'));
+		//获取有权限的菜单tree
+		$menus=$auth->get_admin_menus();
+		$this->assign('menus',$menus);
+		//当前方法倒推到顶级菜单ids数组
+		$menus_curr=$auth->get_admin_parents($id_curr);
+		$this->assign('menus_curr',$menus_curr);
+		//取当前操作菜单父节点下菜单 当前菜单id(仅显示状态)
+        $menus_child=$auth->get_admin_parent_menus($id_curr);
+		$this->assign('menus_child',$menus_child);
+		$this->assign('id_curr',$id_curr);
+		$this->assign('admin_avatar',session('admin_auth.admin_avatar'));
+	}
+ 
+}
+```
+
+子类不需要继承父类内容则写一个空方法就可以了
+
+```
+class Base extends Common 
+{
+	public function _initialize()
+	{
+        }
+ 
+}
+```
