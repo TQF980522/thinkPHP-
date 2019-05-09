@@ -227,19 +227,13 @@ switch也是thinkphp内置标签  当name 的值和value的值相等的时候才
 
 - **text-overflow: ellipsis 以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本。**
 
-
-
 # 巧用 HTML5 data 属性
-
-
 
 HTML 5 之前，需要使用其他的数据时，是非常糟糕的。为了使一切正常有效，你不得不将数据填充到 rel 或 class 属性
 
 自从 HTML5 自定义 data 属性出现，你可以存储任意数据，通过一种简单，符合标准的方式。
 
-
-
-> ### 1. 如何使用data属性呢？
+> ### 1. 如何使用data属性呢？
 
 一个 data 属性，本质就是：一个用于保存数据的自定义属性。它们总是以 data- 作为前缀，后面跟随着描述性的（只允许小写字母和连接字符-hyphens）。
 
@@ -267,9 +261,7 @@ Data URLs 让你的生活变得更简单。
 
 **使用 data 属性，需要记住一点，data 属性不能保存对象。如果你真的想要保存对象，可通过对象序列化。**
 
-
-
-> ### 3. 使用JavaScript读/写data属性
+> ### 3. 使用JavaScript读/写data属性
 
 使用删除按钮作为例子，看看如何使用 JavaScript 访问数据。
 
@@ -292,7 +284,7 @@ button.setAttribute('data-id', yourNewId);
 
 ```
 // 取值
-var cmd = $("#your-button-id").attr('data-cmd'); // $("#your-button-id").data('data-cmd');
+var cmd = $("#your-button-id").attr('data-cmd'); // $("#your-button-id").data('data-cmd');
 var id = $("#your-button-id").attr('data-id');
 
 
@@ -304,15 +296,11 @@ $("#your-button-id").attr('data-cmd', yourNewCmd).attr('data-id', yourNewId);
 
 **如果你对 .data() 不熟悉，那么就牢记住 .attr() 就好了。**
 
-
-
 > ### 5、使用 dataset API
 
 HTML5 有一个用于与这类型数据的 API。唉，IE10 和 低于IE10 并没有完全支持这一特性。
 
 再次以按钮案例，让我们看看如何使用 dataset API 来设置 data 属性的：
-
-
 
 ```
 // here's our button
@@ -330,3 +318,33 @@ button.dataset.id = yourNewId;
 
 这里没有 data - 前缀或破折号。类似于 CSS 属性工作在 JavaScript ，你将必须使用驼峰命名法。  
 dataset API 转换每一个，你总是会在 HTML 使用 data-some-attribute-name，而 JavaScript 中是 dataset.someAttributeName。
+
+
+
+## CSS 图片处理
+
+#### [css3 object-fit](https://www.cnblogs.com/ranyonsue/p/9367423.html)
+
+`object-fit理解`
+
+CSS3 background-size出现的比较早，大家应该知道其支持的一些值，除了数值之外，其还支持几个关键字，例如：cover, contain等。
+
+object-fit也是类似的，但还是有些差异，具体有5个值：
+
+.fill { object-fit: fill; }
+
+.contain { object-fit: contain; }
+
+.cover { object-fit: cover; }
+
+.none { object-fit: none; }
+
+.scale-down { object-fit: scale-down; }
+
+每个属性值的具体含义如下（自己理解的白话文，官方释义见官网）：
+
+- fill: 中文释义“填充”。**默认值**。替换内容拉伸填满整个[content](https://www.ylefu.com/tags/113/ "content") box, 不保证保持原有的比例。
+- contain: 中文释义“包含”。保持原有尺寸比例。保证替换内容尺寸一定可以在容器里面放得下。因此，此参数可能会在容器内留下空白。
+- cover: 中文释义“覆盖”。保持原有尺寸比例。保证替换内容尺寸一定大于容器尺寸，宽度和高度至少有一个和容器一致。因此，此参数可能会让替换内容（如[图片](https://www.ylefu.com/tags/58/ "图片")）部分区域不可见。
+- none: 中文释义“无”。保持原有尺寸比例。同时保持替换内容原始尺寸大小。
+- scale-down: 中文释义“降低”。就好像依次设置了none或contain, 最终呈现的是尺寸比较小的那个。
