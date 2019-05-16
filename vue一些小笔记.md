@@ -234,12 +234,17 @@ axios('/user/12345');
   `父组件给子组件传值，使用props`
 
   ```
+
   //父组件：parent.vue
+
   <template>
+
       <div>
           <child :vals = "msg"></child>
       </div>
+
   </template>
+
   <script>
   import child from "./child";
   export default {
@@ -254,7 +259,6 @@ axios('/user/12345');
   }
   </script>
 
-  
   //子组件：child.vue
   <template>
       <div>
@@ -271,7 +275,8 @@ axios('/user/12345');
       },
   }
   </script>
-  ```
+
+```
 
 * **子组件到父组件的通信**
 
@@ -294,8 +299,8 @@ axios('/user/12345');
   2.2 : $emit事件触发， 可以通过父组件操作子组件 (ref)的事件来触发 自定义事件$emit
 
   第一种情况：
+```
 
-  ```
   //父组件：parent.vue
   <template>
       <div>
@@ -322,7 +327,7 @@ axios('/user/12345');
       }
   }
   </script>
-  
+
   //子组件：child.vue
   <template>
       <div>
@@ -343,11 +348,12 @@ axios('/user/12345');
       },
   }
   </script>
-  ```
+
+```
 
   第二种情况
+```
 
-  ```
   //父组件：parent.vue
   <template>
       <div>
@@ -378,7 +384,7 @@ axios('/user/12345');
       }
   }
   </script>
-  
+
   //子组件：child.vue
   <template>
       <div>
@@ -399,7 +405,8 @@ axios('/user/12345');
       },
   }
   </script>
-  ```
+
+```
 
   `将两者情况对比，区别就在于$emit 自定义事件的触发是有父组件还是子组件去触发`
 
@@ -418,13 +425,18 @@ axios('/user/12345');
    4.接收数据方，在mounted()钩子函数(挂载实例)中 触发事件$on(方法名，callback(接收数据的数据))，此时callback函数中的this已经发生了改变，可以使用箭头函数。
 
   例子：
+```
 
-  ```
-  //建立一个空的Vue实例,将通信事件挂载在该实例上
+  //建立一个空的Vue实例,将通信事件挂载在该实例上 就是新建一个中间介文件（就是桥梁的意思 不做任何事情 就只挂载vue实例，如下）
+
+#### 定义桥梁之后我们首先要在我们创建的这两个兄弟组件中引入它
+
   //emptyVue.js
   import Vue from 'vue'
   export default new Vue()
-  
+
+
+
   //兄弟组件a:childa.vue
   <template>
       <div>
@@ -448,7 +460,6 @@ axios('/user/12345');
   }
   </script>
 
-  
   //兄弟组件b:childb.vue
   <template>
        <div>
@@ -471,7 +482,6 @@ axios('/user/12345');
       }
   }
   </script>
-  
 
   //父组件：parent.vue
   <template>
@@ -493,7 +503,7 @@ axios('/user/12345');
           childa,
           childb
       },
-    
+
   }
   </script>
   ```
